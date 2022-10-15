@@ -97,6 +97,8 @@ class FFAppState {
   double cartSum = 0.0;
 
   bool showListProduct = true;
+
+  String token = '';
 }
 
 LatLng? _latLngFromString(String? val) {

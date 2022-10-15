@@ -1,3 +1,5 @@
+import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -23,6 +25,7 @@ class SingleRoomWidget extends StatefulWidget {
 }
 
 class _SingleRoomWidgetState extends State<SingleRoomWidget> {
+  ApiCallResponse? apiToken;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -158,9 +161,22 @@ class _SingleRoomWidgetState extends State<SingleRoomWidget> {
                         onPressed: () async {
                           logFirebaseEvent(
                               'SINGLE_ROOM_PAGE_VIDEOCALL_BTN_ON_TAP');
+                          logFirebaseEvent('Button_Backend-Call');
+                          apiToken = await GETTokenCall.call(
+                            channelName: singleRoomRoomsRecord.roomName,
+                            userType: 1,
+                            uid: currentUserUid,
+                          );
+                          logFirebaseEvent('Button_Update-Local-State');
+                          setState(
+                              () => FFAppState().token = GETTokenCall.token(
+                                    (apiToken?.jsonBody ?? ''),
+                                  ).toString());
                           logFirebaseEvent('Button_Navigate-To');
 
                           context.pushNamed('VideocallsPage');
+
+                          setState(() {});
                         },
                         text: 'Videocall',
                         icon: FaIcon(
