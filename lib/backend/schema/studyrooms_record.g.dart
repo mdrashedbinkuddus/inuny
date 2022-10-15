@@ -91,6 +91,13 @@ class _$StudyroomsRecordSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.thereHeader;
+    if (value != null) {
+      result
+        ..add('thereHeader')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -154,6 +161,10 @@ class _$StudyroomsRecordSerializer
           result.isPublic = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'thereHeader':
+          result.thereHeader = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -189,6 +200,8 @@ class _$StudyroomsRecord extends StudyroomsRecord {
   @override
   final bool? isPublic;
   @override
+  final bool? thereHeader;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$StudyroomsRecord(
@@ -206,6 +219,7 @@ class _$StudyroomsRecord extends StudyroomsRecord {
       this.timestamp,
       this.uid,
       this.isPublic,
+      this.thereHeader,
       this.ffRef})
       : super._();
 
@@ -231,6 +245,7 @@ class _$StudyroomsRecord extends StudyroomsRecord {
         timestamp == other.timestamp &&
         uid == other.uid &&
         isPublic == other.isPublic &&
+        thereHeader == other.thereHeader &&
         ffRef == other.ffRef;
   }
 
@@ -245,16 +260,18 @@ class _$StudyroomsRecord extends StudyroomsRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, creator.hashCode),
-                                            header.hashCode),
-                                        roomName.hashCode),
-                                    description.hashCode),
-                                isLive.hashCode),
-                            playbackname.hashCode),
-                        playbackUrl.hashCode),
-                    timestamp.hashCode),
-                uid.hashCode),
-            isPublic.hashCode),
+                                        $jc(
+                                            $jc($jc(0, creator.hashCode),
+                                                header.hashCode),
+                                            roomName.hashCode),
+                                        description.hashCode),
+                                    isLive.hashCode),
+                                playbackname.hashCode),
+                            playbackUrl.hashCode),
+                        timestamp.hashCode),
+                    uid.hashCode),
+                isPublic.hashCode),
+            thereHeader.hashCode),
         ffRef.hashCode));
   }
 
@@ -271,6 +288,7 @@ class _$StudyroomsRecord extends StudyroomsRecord {
           ..add('timestamp', timestamp)
           ..add('uid', uid)
           ..add('isPublic', isPublic)
+          ..add('thereHeader', thereHeader)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -320,6 +338,10 @@ class StudyroomsRecordBuilder
   bool? get isPublic => _$this._isPublic;
   set isPublic(bool? isPublic) => _$this._isPublic = isPublic;
 
+  bool? _thereHeader;
+  bool? get thereHeader => _$this._thereHeader;
+  set thereHeader(bool? thereHeader) => _$this._thereHeader = thereHeader;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -341,6 +363,7 @@ class StudyroomsRecordBuilder
       _timestamp = $v.timestamp;
       _uid = $v.uid;
       _isPublic = $v.isPublic;
+      _thereHeader = $v.thereHeader;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -374,6 +397,7 @@ class StudyroomsRecordBuilder
             timestamp: timestamp,
             uid: uid,
             isPublic: isPublic,
+            thereHeader: thereHeader,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

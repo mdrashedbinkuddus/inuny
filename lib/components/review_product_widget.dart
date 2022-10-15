@@ -255,13 +255,6 @@ class _ReviewProductWidgetState extends State<ReviewProductWidget>
                       };
                       await widget.productRef!.reference
                           .update(productsUpdateData);
-                      logFirebaseEvent('Button_Backend-Call');
-
-                      final orderPlacedUpdateData = createOrderPlacedRecordData(
-                        rated: true,
-                      );
-                      await widget.ordersRef!.reference
-                          .update(orderPlacedUpdateData);
                       logFirebaseEvent('Button_Show-Snack-Bar');
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

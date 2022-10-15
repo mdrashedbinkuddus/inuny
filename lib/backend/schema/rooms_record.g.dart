@@ -40,14 +40,6 @@ class _$RoomsRecordSerializer implements StructuredSerializer<RoomsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.members;
-    if (value != null) {
-      result
-        ..add('members')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType.nullable(Object)])));
-    }
     value = object.isPublic;
     if (value != null) {
       result
@@ -62,12 +54,36 @@ class _$RoomsRecordSerializer implements StructuredSerializer<RoomsRecord> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.therePhoto;
+    if (value != null) {
+      result
+        ..add('therePhoto')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.member;
+    if (value != null) {
+      result
+        ..add('member')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(BuiltList, const [
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
+            ])));
+    }
+    value = object.shortDescription;
+    if (value != null) {
+      result
+        ..add('shortDescription')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.organizer;
     if (value != null) {
       result
         ..add('organizer')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     value = object.ffRef;
     if (value != null) {
@@ -103,12 +119,6 @@ class _$RoomsRecordSerializer implements StructuredSerializer<RoomsRecord> {
           result.picRoom = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'members':
-          result.members = serializers.deserialize(value,
-              specifiedType: const FullType(DocumentReference, const [
-                const FullType.nullable(Object)
-              ])) as DocumentReference<Object?>?;
-          break;
         case 'isPublic':
           result.isPublic = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
@@ -117,9 +127,24 @@ class _$RoomsRecordSerializer implements StructuredSerializer<RoomsRecord> {
           result.isLive = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'therePhoto':
+          result.therePhoto = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'member':
+          result.member.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
+          break;
+        case 'shortDescription':
+          result.shortDescription = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'organizer':
           result.organizer = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -142,13 +167,17 @@ class _$RoomsRecord extends RoomsRecord {
   @override
   final String? picRoom;
   @override
-  final DocumentReference<Object?>? members;
-  @override
   final bool? isPublic;
   @override
   final bool? isLive;
   @override
-  final String? organizer;
+  final bool? therePhoto;
+  @override
+  final BuiltList<DocumentReference<Object?>>? member;
+  @override
+  final String? shortDescription;
+  @override
+  final bool? organizer;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -159,9 +188,11 @@ class _$RoomsRecord extends RoomsRecord {
       {this.roomName,
       this.description,
       this.picRoom,
-      this.members,
       this.isPublic,
       this.isLive,
+      this.therePhoto,
+      this.member,
+      this.shortDescription,
       this.organizer,
       this.ffRef})
       : super._();
@@ -180,9 +211,11 @@ class _$RoomsRecord extends RoomsRecord {
         roomName == other.roomName &&
         description == other.description &&
         picRoom == other.picRoom &&
-        members == other.members &&
         isPublic == other.isPublic &&
         isLive == other.isLive &&
+        therePhoto == other.therePhoto &&
+        member == other.member &&
+        shortDescription == other.shortDescription &&
         organizer == other.organizer &&
         ffRef == other.ffRef;
   }
@@ -195,12 +228,16 @@ class _$RoomsRecord extends RoomsRecord {
                 $jc(
                     $jc(
                         $jc(
-                            $jc($jc(0, roomName.hashCode),
-                                description.hashCode),
-                            picRoom.hashCode),
-                        members.hashCode),
-                    isPublic.hashCode),
-                isLive.hashCode),
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, roomName.hashCode),
+                                        description.hashCode),
+                                    picRoom.hashCode),
+                                isPublic.hashCode),
+                            isLive.hashCode),
+                        therePhoto.hashCode),
+                    member.hashCode),
+                shortDescription.hashCode),
             organizer.hashCode),
         ffRef.hashCode));
   }
@@ -211,9 +248,11 @@ class _$RoomsRecord extends RoomsRecord {
           ..add('roomName', roomName)
           ..add('description', description)
           ..add('picRoom', picRoom)
-          ..add('members', members)
           ..add('isPublic', isPublic)
           ..add('isLive', isLive)
+          ..add('therePhoto', therePhoto)
+          ..add('member', member)
+          ..add('shortDescription', shortDescription)
           ..add('organizer', organizer)
           ..add('ffRef', ffRef))
         .toString();
@@ -235,10 +274,6 @@ class RoomsRecordBuilder implements Builder<RoomsRecord, RoomsRecordBuilder> {
   String? get picRoom => _$this._picRoom;
   set picRoom(String? picRoom) => _$this._picRoom = picRoom;
 
-  DocumentReference<Object?>? _members;
-  DocumentReference<Object?>? get members => _$this._members;
-  set members(DocumentReference<Object?>? members) => _$this._members = members;
-
   bool? _isPublic;
   bool? get isPublic => _$this._isPublic;
   set isPublic(bool? isPublic) => _$this._isPublic = isPublic;
@@ -247,9 +282,24 @@ class RoomsRecordBuilder implements Builder<RoomsRecord, RoomsRecordBuilder> {
   bool? get isLive => _$this._isLive;
   set isLive(bool? isLive) => _$this._isLive = isLive;
 
-  String? _organizer;
-  String? get organizer => _$this._organizer;
-  set organizer(String? organizer) => _$this._organizer = organizer;
+  bool? _therePhoto;
+  bool? get therePhoto => _$this._therePhoto;
+  set therePhoto(bool? therePhoto) => _$this._therePhoto = therePhoto;
+
+  ListBuilder<DocumentReference<Object?>>? _member;
+  ListBuilder<DocumentReference<Object?>> get member =>
+      _$this._member ??= new ListBuilder<DocumentReference<Object?>>();
+  set member(ListBuilder<DocumentReference<Object?>>? member) =>
+      _$this._member = member;
+
+  String? _shortDescription;
+  String? get shortDescription => _$this._shortDescription;
+  set shortDescription(String? shortDescription) =>
+      _$this._shortDescription = shortDescription;
+
+  bool? _organizer;
+  bool? get organizer => _$this._organizer;
+  set organizer(bool? organizer) => _$this._organizer = organizer;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -265,9 +315,11 @@ class RoomsRecordBuilder implements Builder<RoomsRecord, RoomsRecordBuilder> {
       _roomName = $v.roomName;
       _description = $v.description;
       _picRoom = $v.picRoom;
-      _members = $v.members;
       _isPublic = $v.isPublic;
       _isLive = $v.isLive;
+      _therePhoto = $v.therePhoto;
+      _member = $v.member?.toBuilder();
+      _shortDescription = $v.shortDescription;
       _organizer = $v.organizer;
       _ffRef = $v.ffRef;
       _$v = null;
@@ -290,16 +342,31 @@ class RoomsRecordBuilder implements Builder<RoomsRecord, RoomsRecordBuilder> {
   RoomsRecord build() => _build();
 
   _$RoomsRecord _build() {
-    final _$result = _$v ??
-        new _$RoomsRecord._(
-            roomName: roomName,
-            description: description,
-            picRoom: picRoom,
-            members: members,
-            isPublic: isPublic,
-            isLive: isLive,
-            organizer: organizer,
-            ffRef: ffRef);
+    _$RoomsRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$RoomsRecord._(
+              roomName: roomName,
+              description: description,
+              picRoom: picRoom,
+              isPublic: isPublic,
+              isLive: isLive,
+              therePhoto: therePhoto,
+              member: _member?.build(),
+              shortDescription: shortDescription,
+              organizer: organizer,
+              ffRef: ffRef);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'member';
+        _member?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'RoomsRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

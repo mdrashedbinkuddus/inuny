@@ -323,6 +323,47 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 userRef: params.getParam('userRef', ParamType.Document),
                 orderRef: params.getParam('orderRef', ParamType.Document),
               ),
+            ),
+            FFRoute(
+              name: 'CreateStudyRooms',
+              path: 'createStudyRooms',
+              requireAuth: true,
+              builder: (context, params) => CreateStudyRoomsWidget(),
+            ),
+            FFRoute(
+              name: 'StudyRooms',
+              path: 'studyRooms',
+              builder: (context, params) => StudyRoomsWidget(),
+            ),
+            FFRoute(
+              name: 'SingleRoom',
+              path: 'singleRoom',
+              requireAuth: true,
+              builder: (context, params) => SingleRoomWidget(
+                roomRef: params.getParam(
+                    'roomRef', ParamType.DocumentReference, false, 'Rooms'),
+                organizerRef: params.getParam('organizerRef',
+                    ParamType.DocumentReference, false, 'users'),
+              ),
+            ),
+            FFRoute(
+              name: 'VideocallsPage',
+              path: 'videocallsPage',
+              requireAuth: true,
+              builder: (context, params) => VideocallsPageWidget(),
+            ),
+            FFRoute(
+              name: 'SearchStudyRooms',
+              path: 'searchStudyRooms',
+              builder: (context, params) => SearchStudyRoomsWidget(),
+            ),
+            FFRoute(
+              name: 'InviteUsers',
+              path: 'inviteUsers',
+              builder: (context, params) => InviteUsersWidget(
+                roomRef: params.getParam(
+                    'roomRef', ParamType.DocumentReference, false, 'Rooms'),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

@@ -42,3 +42,11 @@ export 'my_articles/my_articles_widget.dart' show MyArticlesWidget;
 export 'my_orders/my_orders_widget.dart' show MyOrdersWidget;
 export 'orders/orders_widget.dart' show OrdersWidget;
 export 'success/success_widget.dart' show SuccessWidget;
+export 'create_study_rooms/create_study_rooms_widget.dart'
+    show CreateStudyRoomsWidget;
+export 'study_rooms/study_rooms_widget.dart' show StudyRoomsWidget;
+export 'single_room/single_room_widget.dart' show SingleRoomWidget;
+export 'videocalls_page/videocalls_page_widget.dart' show VideocallsPageWidget;
+export 'search_study_rooms/search_study_rooms_widget.dart'
+    show SearchStudyRoomsWidget;
+export 'invite_users/invite_users_widget.dart' show InviteUsersWidget;

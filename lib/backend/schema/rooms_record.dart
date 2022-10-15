@@ -16,13 +16,17 @@ abstract class RoomsRecord implements Built<RoomsRecord, RoomsRecordBuilder> {
 
   String? get picRoom;
 
-  DocumentReference? get members;
-
   bool? get isPublic;
 
   bool? get isLive;
 
-  String? get organizer;
+  bool? get therePhoto;
+
+  BuiltList<DocumentReference>? get member;
+
+  String? get shortDescription;
+
+  bool? get organizer;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -34,7 +38,10 @@ abstract class RoomsRecord implements Built<RoomsRecord, RoomsRecordBuilder> {
     ..picRoom = ''
     ..isPublic = false
     ..isLive = false
-    ..organizer = '';
+    ..therePhoto = false
+    ..member = ListBuilder()
+    ..shortDescription = ''
+    ..organizer = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Rooms');
@@ -61,10 +68,11 @@ Map<String, dynamic> createRoomsRecordData({
   String? roomName,
   String? description,
   String? picRoom,
-  DocumentReference? members,
   bool? isPublic,
   bool? isLive,
-  String? organizer,
+  bool? therePhoto,
+  String? shortDescription,
+  bool? organizer,
 }) {
   final firestoreData = serializers.toFirestore(
     RoomsRecord.serializer,
@@ -73,9 +81,11 @@ Map<String, dynamic> createRoomsRecordData({
         ..roomName = roomName
         ..description = description
         ..picRoom = picRoom
-        ..members = members
         ..isPublic = isPublic
         ..isLive = isLive
+        ..therePhoto = therePhoto
+        ..member = null
+        ..shortDescription = shortDescription
         ..organizer = organizer,
     ),
   );

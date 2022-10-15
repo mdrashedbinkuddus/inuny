@@ -36,6 +36,8 @@ abstract class StudyroomsRecord
 
   bool? get isPublic;
 
+  bool? get thereHeader;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -49,7 +51,8 @@ abstract class StudyroomsRecord
     ..playbackname = ''
     ..playbackUrl = ''
     ..uid = ''
-    ..isPublic = false;
+    ..isPublic = false
+    ..thereHeader = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('studyrooms');
@@ -76,6 +79,7 @@ abstract class StudyroomsRecord
               DateTime.fromMillisecondsSinceEpoch(snapshot.data['timestamp']))
           ..uid = snapshot.data['uid']
           ..isPublic = snapshot.data['isPublic']
+          ..thereHeader = snapshot.data['thereHeader']
           ..ffRef = StudyroomsRecord.collection.doc(snapshot.objectID),
       );
 
@@ -115,6 +119,7 @@ Map<String, dynamic> createStudyroomsRecordData({
   DateTime? timestamp,
   String? uid,
   bool? isPublic,
+  bool? thereHeader,
 }) {
   final firestoreData = serializers.toFirestore(
     StudyroomsRecord.serializer,
@@ -129,7 +134,8 @@ Map<String, dynamic> createStudyroomsRecordData({
         ..playbackUrl = playbackUrl
         ..timestamp = timestamp
         ..uid = uid
-        ..isPublic = isPublic,
+        ..isPublic = isPublic
+        ..thereHeader = thereHeader,
     ),
   );
 

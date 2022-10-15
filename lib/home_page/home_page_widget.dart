@@ -88,6 +88,23 @@ class _HomePageWidgetState extends State<HomePageWidget>
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            FFIcons.kvideoCameraAlt,
+            color: FlutterFlowTheme.of(context).primaryText,
+            size: 30,
+          ),
+          onPressed: () async {
+            logFirebaseEvent('HOME_PAGE_PAGE_videoCameraAlt_ICN_ON_TAP');
+            logFirebaseEvent('IconButton_Navigate-To');
+
+            context.pushNamed('StudyRooms');
+          },
+        ),
         actions: [
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
