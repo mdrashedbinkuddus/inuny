@@ -1,6 +1,5 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,19 +48,7 @@ class _VideocallsPageWidgetState extends State<VideocallsPageWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: custom_widgets.VideoCall(
-                    width: double.infinity,
-                    height: double.infinity,
-                    channel: 'Test',
-                  ),
-                ),
-              ),
-            ],
+            children: [],
           ),
         ),
       ),
